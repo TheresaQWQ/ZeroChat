@@ -5,7 +5,7 @@ const routes = [{
   name: 'Home',
   component: () => import('../views/HomeView.vue'),
   meta: {
-    title: 'Loading...'
+    title: 'Home'
   }
 }]
 
@@ -16,7 +16,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const title = to.meta.title || 'Home';
-  document.title = `${title} - AnyChat`;
+  document.title = `${title} - ZeroChat`;
 
   next();
 })

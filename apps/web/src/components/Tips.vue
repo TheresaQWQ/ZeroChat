@@ -53,7 +53,7 @@ const color = {
   font-size: 36px !important;
 }
 
-.tips .content >>> * {
+.tips .content:deep() * {
   margin: 4px 0;
   font-size: 14px;
   color: #fff;

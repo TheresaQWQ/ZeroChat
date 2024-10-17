@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {defineProps, ref} from 'vue'
+import {defineProps, onMounted, ref} from 'vue'
 
 const isFocused = ref(false)
 
@@ -10,17 +10,27 @@ const props = defineProps({
   },
   placeholder: {
     type: String
+  },
+  type: {
+    type: String,
+    default: 'text'
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 
 const updateFocus = (focus: boolean) => {
-  isFocused.value = focus && props.modelValue.length === 0;
+  isFocused.value = focus || props.modelValue.length > 0;
 }
+
+onMounted(() => updateFocus(false))
 </script>
 
 <template>
   <div class="input">
-    <input type="text" @focus="updateFocus(true)" @blur="updateFocus(false)" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
+    <input :disabled="disabled" :type="type" @focus="updateFocus(true)" @blur="updateFocus(false)" :value="modelValue" @input="$emit('update:modelValue', ($event.target as any).value)">
     <label :class="isFocused && 'focus'">{{ placeholder }}</label>
   </div>
 </template>
@@ -44,6 +54,11 @@ input {
   color: var(--theme-text-color-primary);
   font-size: 16px;
   height: 18px;
+}
+
+input:disabled {
+  background-color: var(--theme-bg-color-component-disabled);
+  color: var(--theme-text-color-secondary);
 }
 
 input:focus {

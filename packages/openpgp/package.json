@@ -1,0 +1,8 @@
+{
+  "name": "@zero-chat/openpgp",
+  "main": "./src/index.ts",
+  "dependencies": {
+    "openpgp": "^5.11.2"
+  },
+  "private": true
+}
